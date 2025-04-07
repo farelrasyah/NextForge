@@ -17,27 +17,27 @@ const Features: React.FC = () => {
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Responsive Design",
-      description: "Create beautiful websites that work seamlessly on any device, from desktop to mobile."
+      title: "🤖 AI Assistant 24/7",
+      description: "Bukan hanya laporan keuangan, tapi rekomendasi nyata tiap hari untuk membantu kamu mengambil keputusan keuangan yang lebih baik."
     },
     {
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13 10V3L4 14H11V21L20 10H13Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M16 4V16M16 16L19 13M16 16L13 13M8 20V8M8 8L5 11M8 8L11 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Lightning Fast",
-      description: "Optimized for speed with next-generation performance that keeps your users engaged."
+      title: "📅 Autopilot Budget",
+      description: "Budget mingguan otomatis yang dibuat berdasarkan pola pengeluaran dan gaya hidupmu. Tidak perlu repot membuat anggaran manual."
     },
     {
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" 
+          <path d="M2 16L11.29 6.71C11.3851 6.61749 11.4972 6.54397 11.6199 6.49372C11.7425 6.44347 11.8734 6.41754 12.005 6.41754C12.1366 6.41754 12.2675 6.44347 12.3901 6.49372C12.5128 6.54397 12.6249 6.61749 12.72 6.71L22 16M4 20H20C20.5304 20 21.0391 19.7893 21.4142 19.4142C21.7893 19.0391 22 18.5304 22 18V6C22 5.46957 21.7893 4.96086 21.4142 4.58579C21.0391 4.21071 20.5304 4 20 4H4C3.46957 4 2.96086 4.21071 2.58579 4.58579C2.21071 4.96086 2 5.46957 2 6V18C2 18.5304 2.21071 19.0391 2.58579 19.4142C2.96086 19.7893 3.46957 20 4 20Z" 
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "SEO Optimized",
-      description: "Built with best practices for search engines, helping your site rank higher and reach more users."
+      title: "🎯 Simulasi Masa Depan",
+      description: "Mau pensiun umur 40? Beli rumah 10 tahun lagi? Nexora bisa mensimulasikan berbagai skenario keuangan masa depanmu."
     },
     {
       icon: (
@@ -48,30 +48,8 @@ const Features: React.FC = () => {
             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       ),
-      title: "Easy Customization",
-      description: "Tailor your website to your exact needs with our flexible and intuitive customization options."
-    },
-    {
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89317 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88M13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3C11.2091 3 13 4.79086 13 7Z" 
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-      title: "Community Support",
-      description: "Join a thriving community of developers and designers sharing knowledge and best practices."
-    },
-    {
-      icon: (
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" 
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M12 4V2M12 22V20M20 12H22M2 12H4M19.0711 19.0711L20.5 20.5M19.0711 4.92893L20.5 3.5M4.92893 19.0711L3.5 20.5M4.92893 4.92893L3.5 3.5" 
-            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      ),
-      title: "Smart Automation",
-      description: "Save time with intelligent automation features that streamline your workflow and boost productivity."
+      title: "🧠 Insight Emosi + Uang",
+      description: "AI kami mengenali pola emosimu saat berbelanja. Karena keuangan bukan hanya tentang angka, tapi juga perasaan."
     }
   ];
 
@@ -82,14 +60,14 @@ const Features: React.FC = () => {
           ref={headingRef} 
           className={`text-center mb-12 fade-in ${isHeadingVisible ? 'visible' : ''}`}
         >
-          <p className="subtitle">Features</p>
-          <h2>Everything You Need to <span className="gradient-text">Create Amazing</span> Websites</h2>
+          <p className="subtitle">Fitur Unggulan</p>
+          <h2>Yang Bikin Nexora <span className="gradient-text">Berbeda</span></h2>
           <p style={{ maxWidth: '600px', margin: '0 auto', color: 'var(--text-secondary)' }}>
-            Our platform provides all the tools you need to create stunning, high-performance websites without the complexity.
+            Bukan sekedar aplikasi keuangan biasa. Nexora menggunakan AI untuk memberikan pengalaman pengelolaan uang yang personal.
           </p>
         </div>
 
-        <div className="features-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        <div className="features-grid grid grid-cols-1 sm:grid-cols-2 gap-8">
           {features.map((feature, index) => (
             <Card
               key={index}
