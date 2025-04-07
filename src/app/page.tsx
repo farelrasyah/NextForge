@@ -1,592 +1,198 @@
-"use client";
+'use client';
 
-import { useEffect, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useEffect } from 'react';
+import Navbar from '../pages/LandingPage/Navbar';
+import Hero from '../pages/LandingPage/Hero';
+import Features from '../pages/LandingPage/Features';
+import Contact from '../pages/LandingPage/Contact';
 
-export default function SplashScreen() {
-  const [loadingPercentage, setLoadingPercentage] = useState(0);
-  const [soundEnabled, setSoundEnabled] = useState(false);
-  const audioRef = useRef<HTMLAudioElement>(null);
+// Import styles
+import '../styles/typography.css';
+import '../styles/LandingPage.css';
 
+export default function Home() {
   useEffect(() => {
-    const interval = setInterval(() => {
-      setLoadingPercentage((prev) => {
-        if (prev < 100) {
-          return prev + 1;
-        } else {
-          clearInterval(interval);
-          return prev;
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(this: HTMLAnchorElement, e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        if (href) {
+          const targetElement = document.querySelector(href);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.getBoundingClientRect().top + window.scrollY,
+              behavior: 'smooth'
+            });
+          }
         }
       });
-    }, 50);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  const toggleSound = () => {
-    if (audioRef.current) {
-      if (!soundEnabled) {
-        audioRef.current.play();
-      } else {
-        audioRef.current.pause();
-      }
-      setSoundEnabled(!soundEnabled);
-    }
-  };
-
-  return (
-    <div className="splash-screen">
-      {/* Hidden audio element */}
-      <audio
-        ref={audioRef}
-        src="/ambient-sound.mp3"
-        loop
-      />
-      
-      {/* Brand header */}
-      <div className="brand-header">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="brand-logo"
-        >
-          NEXT-FORGE
-        </motion.div>
-      </div>
-      
-      {/* Loading section */}
-      <motion.div 
-        className="loading-container"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-      >
-        <div className="loading-text">
-          <motion.span
-            initial={{ opacity: 0.6 }}
-            animate={{ opacity: [0.6, 1, 0.6] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            INITIALIZING SYSTEM — {loadingPercentage}%
-          </motion.span>
-        </div>
-        <div className="loading-bar-container">
-          <motion.div 
-            className="loading-bar-progress"
-            initial={{ width: "0%" }}
-            animate={{ width: `${loadingPercentage}%` }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-      </motion.div>
-      
-      {/* Footer */}
-      <motion.div 
-        className="footer"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.9, duration: 0.8 }}
-      >
-        <a
-          href="https://kpverse.com/kpco/foundation/hidden_files"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footer-link"
-        >
-          <span className="link-prefix">&#x2192;</span> kpverse.com/kpco/foundation/hidden_files
-        </a>
-      </motion.div>
-      
-      <style jsx global>{`
-        * {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-        
-        body {
-          margin: 0;
-          padding: 0;
-          background-color: #fff;
-          font-family: 'Space Mono', 'Roboto Mono', monospace;
-          cursor: none;
-          overflow: hidden;
-          color: #111;
-        }
-
-        /* Enhanced cursor styles */
-        @media (pointer: fine) {
-          .cursor-wrapper {
-            position: fixed;
-            width: 80px; /* Smaller, more elegant cursor */
-            height: 80px; /* Smaller, more elegant cursor */
-            pointer-events: none;
-            z-index: 9999;
-            transform: translate(-50%, -50%);
-          }
-          
-          .cursor-ring {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 1px solid rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-            opacity: 0.8;
-            transition: all 0.2s ease;
-          }
-          
-          .cursor-circle-effect {
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            border-radius: 50%;
-            background: radial-gradient(
-              circle,
-              rgba(0, 0, 0, 0.02) 0%,
-              rgba(0, 0, 0, 0) 70%
-            );
-            opacity: 0;
-            transform: scale(0.8);
-            transition: all 0.4s ease;
-          }
-          
-          .cursor-wrapper.active .cursor-circle-effect {
-            opacity: 0.2;
-            transform: scale(1.1);
-          }
-          
-          .cursor-ring-inner {
-            position: absolute;
-            top: 30%;
-            left: 30%;
-            right: 30%;
-            bottom: 30%;
-            border: 1px dashed rgba(0, 0, 0, 0.3);
-            border-radius: 50%;
-            animation: rotate 12s linear infinite;
-            transition: all 0.3s ease;
-          }
-          
-          .cursor-dot {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px;
-            height: 4px;
-            background-color: #000;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform 0.15s ease-out;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-          }
-          
-          .cursor-wrapper.active .cursor-dot {
-            transform: translate(-50%, -50%) scale(1.8);
-          }
-
-          .cursor-wrapper.active .cursor-ring {
-            border-color: rgba(0, 0, 0, 0.7);
-            transform: scale(0.9);
-          }
-
-          .cursor-wrapper.active .cursor-ring-inner {
-            border-color: rgba(0, 0, 0, 0.5);
-            transform: scale(0.8);
-            animation-duration: 8s;
-          }
-          
-          .cursor-content {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transform: scale(0);
-            transition: all 0.3s ease;
-          }
-          
-          .cursor-wrapper.hovering .cursor-content,
-          .cursor-wrapper:hover .cursor-content {
-            opacity: 1;
-            transform: scale(0.9);
-          }
-          
-          .cursor-wrapper.hovering .cursor-ring,
-          .cursor-wrapper:hover .cursor-ring {
-            border-color: rgba(0, 0, 0, 0.7);
-          }
-          
-          .cursor-sound-icon {
-            width: 15px;
-            height: 15px;
-            margin-bottom: 3px;
-            opacity: 0.8;
-            animation: fadeInOut 2s infinite ease-in-out;
-          }
-          
-          .cursor-text {
-            font-size: 7px;
-            white-space: nowrap;
-            text-align: center;
-            color: rgba(0, 0, 0, 0.7);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            line-height: 1;
-          }
-          
-          .cursor-wrapper.hovering .cursor-ring-inner,
-          .cursor-wrapper:hover .cursor-ring-inner {
-            border-color: rgba(0, 0, 0, 0.6);
-            animation-duration: 8s;
-          }
-          
-          @keyframes rotate {
-            0% {
-              transform: rotate(0deg);
-            }
-            100% {
-              transform: rotate(360deg);
-            }
-          }
-          
-          @keyframes rotateReverse {
-            0% {
-              transform: rotate(360deg);
-            }
-            100% {
-              transform: rotate(0deg);
-            }
-          }
-          
-          @keyframes fadeInOut {
-            0%, 100% {
-              opacity: 0.6;
-              transform: scale(1);
-            }
-            50% {
-              opacity: 1;
-              transform: scale(1.1);
-            }
-          }
-
-          .cursor-glow {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: radial-gradient(
-              circle,
-              rgba(0, 0, 0, 0.1) 0%,
-              rgba(0, 0, 0, 0) 70%
-            );
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            filter: blur(2px);
-            opacity: 0.5;
-          }
-          
-          .cursor-wrapper.active .cursor-glow {
-            width: 30px;
-            height: 30px;
-            opacity: 0.7;
-          }
-          
-          /* Trail effect */
-          .cursor-trail {
-            position: fixed;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background-color: rgba(0, 0, 0, 0.05);
-            pointer-events: none;
-            z-index: 9998;
-            mix-blend-mode: difference;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s, opacity 0.3s;
-          }
-        }
-      `}</style>
-      
-      <style jsx>{`
-        .splash-screen {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-between;
-          align-items: center;
-          height: 100vh;
-          padding: 40px 20px;
-          position: relative;
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        /* Brand Header */
-        .brand-header {
-          margin-top: 40px;
-        }
-        
-        .brand-logo {
-          font-size: 24px;
-          font-weight: 600;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          color: #111;
-          position: relative;
-        }
-        
-        .brand-logo::after {
-          content: "";
-          position: absolute;
-          bottom: -8px;
-          left: 0;
-          width: 100%;
-          height: 1px;
-          background-color: #111;
-          transform: scaleX(0.6);
-        }
-
-        /* Loading Section */
-        .loading-container {
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          width: 100%;
-          max-width: 500px;
-        }
-
-        .loading-text {
-          font-size: 14px;
-          font-weight: 500;
-          letter-spacing: 1px;
-          margin-bottom: 15px;
-          color: #333;
-        }
-
-        .loading-bar-container {
-          width: 100%;
-          height: 1px;
-          background-color: rgba(0, 0, 0, 0.1);
-          position: relative;
-          overflow: hidden;
-        }
-
-        .loading-bar-progress {
-          height: 100%;
-          background-color: #111;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 0%;
-        }
-
-        /* Footer */
-        .footer {
-          margin-bottom: 20px;
-        }
-
-        .footer-link {
-          font-size: 13px;
-          color: #333;
-          text-decoration: none;
-          letter-spacing: 0.5px;
-          transition: color 0.2s ease;
-          display: flex;
-          align-items: center;
-          gap: 5px;
-        }
-
-        .footer-link:hover {
-          color: #111;
-        }
-
-        .link-prefix {
-          font-size: 14px;
-        }
-
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-          }
-          to {
-            opacity: 1;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .splash-screen {
-            padding: 30px 15px;
-          }
-          
-          .brand-logo {
-            font-size: 20px;
-          }
-          
-          .loading-container {
-            max-width: 85%;
-          }
-        }
-      `}</style>
-
-      {/* Enhanced custom cursor with sound text and icon */}
-      <EnhancedCursor soundEnabled={soundEnabled} toggleSound={toggleSound} />
-    </div>
-  );
-}
-
-// Enhanced custom cursor component with sound control functionality
-function EnhancedCursor({ soundEnabled, toggleSound }: { soundEnabled: boolean, toggleSound: () => void }) {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
-  const [isActive, setIsActive] = useState(false);
-  const [isHovering, setIsHovering] = useState(false);
-  const [trails, setTrails] = useState<{ id: number; x: number; y: number; opacity: number }[]>([]);
-  const trailIdRef = useRef(0);
-
-  useEffect(() => {
-    interface CursorPosition {
-      x: number;
-      y: number;
-    }
-    
-    let lastPos = { x: -100, y: -100 };
-    let trailTimeout: NodeJS.Timeout;
-    
-    const updatePosition = (e: MouseEvent): void => {
-      const currentPos = { x: e.clientX, y: e.clientY };
-      setPosition(currentPos);
-      
-      // Only add trail if mouse moved a certain distance
-      const distance = Math.hypot(currentPos.x - lastPos.x, currentPos.y - lastPos.y);
-      if (distance > 20) {
-        addTrail(currentPos.x, currentPos.y);
-        lastPos = { ...currentPos };
-      }
-    };
-
-    const addTrail = (x: number, y: number) => {
-      const id = trailIdRef.current++;
-      
-      setTrails(prev => [...prev, { id, x, y, opacity: 0.7 }]);
-      
-      clearTimeout(trailTimeout);
-      trailTimeout = setTimeout(() => {
-        setTrails(prev => prev.map(trail => ({ ...trail, opacity: trail.opacity - 0.1 }))
-          .filter(trail => trail.opacity > 0));
-      }, 50);
-    };
-
-    const handleMouseDown = () => {
-      setIsActive(true);
-    };
-    
-    const handleMouseUp = () => {
-      setIsActive(false);
-    };
-    
-    const handleClick = (e: MouseEvent) => {
-      // Check if we're clicking anywhere that's not a specific interactive element
-      const target = e.target as HTMLElement;
-      if (!target.closest('a') && !target.closest('button') && !target.closest('.footer-link')) {
-        toggleSound();
-      }
-    };
-    
-    const checkHover = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      setIsHovering(!!target.closest('a') || !!target.closest('button') || !!target.closest('.footer-link'));
-    };
-
-    window.addEventListener('mousemove', updatePosition);
-    window.addEventListener('mousedown', handleMouseDown);
-    window.addEventListener('mouseup', handleMouseUp);
-    window.addEventListener('click', handleClick);
-    window.addEventListener('mouseover', checkHover);
+    });
 
     return () => {
-      window.removeEventListener('mousemove', updatePosition);
-      window.removeEventListener('mousedown', handleMouseDown);
-      window.removeEventListener('mouseup', handleMouseUp);
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('mouseover', checkHover);
-      clearTimeout(trailTimeout);
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.removeEventListener('click', function(this: HTMLAnchorElement, e) {
+          // Cleanup
+        });
+      });
     };
-  }, [toggleSound]);
+  }, []);
 
   return (
-    <>
-      {/* Trail effect */}
-      {trails.map(trail => (
-        <div
-          key={trail.id}
-          className="cursor-trail"
-          style={{
-            left: `${trail.x}px`,
-            top: `${trail.y}px`,
-            opacity: trail.opacity,
-          }}
-        />
-      ))}
+    <main>
+      <Navbar />
+      <Hero />
+      <Features />
       
-      {/* Main cursor */}
-      <motion.div 
-        className={`cursor-wrapper ${isActive ? 'active' : ''} ${isHovering ? 'hovering' : ''}`}
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-        }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3 }}
-      >
-        <div className="cursor-circle-effect"></div>
-        <div className="cursor-ring"></div>
-        <div className="cursor-ring-inner"></div>
-        <div className="cursor-glow"></div>
-        
-        <motion.div
-          className="cursor-content"
-          animate={{ 
-            opacity: soundEnabled ? [0.7, 0.9, 0.7] : 0.8,
-            scale: isActive ? 0.95 : 1
-          }}
-          transition={{ 
-            opacity: { repeat: Infinity, duration: 2 },
-            scale: { duration: 0.2 } 
-          }}
-        >
-          <div className="cursor-sound-icon">
-            {soundEnabled ? (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="currentColor" />
-                <path d="M19.07 4.93C21.9 7.76 21.9 12.24 19.07 15.07" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M15.54 8.46C16.9 9.82 16.9 12.18 15.54 13.54" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            ) : (
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5L6 9H2V15H6L11 19V5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                <path d="M23 9L17 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M17 9L23 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            )}
+      {/* Testimonials Section (simplified) */}
+      <section id="testimonials" className="section" style={{ background: 'rgba(30, 41, 59, 0.3)' }}>
+        <div className="container">
+          <div className="text-center mb-12 fade-in visible">
+            <p className="subtitle">Testimonials</p>
+            <h2>What Our <span className="gradient-text">Clients Say</span></h2>
           </div>
-          <div className="cursor-text">
-            {soundEnabled ? "SOUND ON" : "CLICK FOR SOUND"}
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="feature-card fade-in visible">
+              <p style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)', fontStyle: 'italic' }}>
+                "NextForge transformed our online presence. The speed and design of our website have significantly improved user engagement and conversion rates."
+              </p>
+              <div className="flex items-center gap-4">
+                <div style={{ 
+                  width: '50px', 
+                  height: '50px', 
+                  borderRadius: '50%', 
+                  background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: 'var(--text-lg)'
+                }}>
+                  JS
+                </div>
+                <div>
+                  <p style={{ fontWeight: 'var(--font-medium)', margin: 0 }}>John Smith</p>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 'var(--text-sm)' }}>CEO, TechStart</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="feature-card fade-in visible">
+              <p style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)', fontStyle: 'italic' }}>
+                "The customization options are incredible. We were able to create exactly what we envisioned without compromising on performance or design."
+              </p>
+              <div className="flex items-center gap-4">
+                <div style={{ 
+                  width: '50px', 
+                  height: '50px', 
+                  borderRadius: '50%', 
+                  background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: 'white',
+                  fontWeight: 'bold',
+                  fontSize: 'var(--text-lg)'
+                }}>
+                  AR
+                </div>
+                <div>
+                  <p style={{ fontWeight: 'var(--font-medium)', margin: 0 }}>Alex Rivera</p>
+                  <p style={{ color: 'var(--text-secondary)', margin: 0, fontSize: 'var(--text-sm)' }}>Designer, CreativeStudio</p>
+                </div>
+              </div>
+            </div>
           </div>
-        </motion.div>
-        <div className="cursor-dot"></div>
-      </motion.div>
-    </>
+        </div>
+      </section>
+      
+      <Contact />
+      
+      {/* Footer */}
+      <footer style={{ 
+        backgroundColor: 'var(--bg-secondary)', 
+        padding: 'var(--space-8) 0',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)'
+      }}>
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <a href="#" className="logo" style={{ marginBottom: 'var(--space-4)', display: 'inline-block' }}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L1 12L12 22L23 12L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M12 22V12M12 12L1 12M12 12L23 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                NextForge
+              </a>
+              <p style={{ color: 'var(--text-secondary)', fontSize: 'var(--text-sm)' }}>
+                Building the future of web development with modern tools and techniques.
+              </p>
+            </div>
+            
+            <div>
+              <h4 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)' }}>Quick Links</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li style={{ marginBottom: 'var(--space-2)' }}><a href="#hero" className="nav-link">Home</a></li>
+                <li style={{ marginBottom: 'var(--space-2)' }}><a href="#features" className="nav-link">Features</a></li>
+                <li style={{ marginBottom: 'var(--space-2)' }}><a href="#testimonials" className="nav-link">Testimonials</a></li>
+                <li><a href="#contact" className="nav-link">Contact</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)' }}>Legal</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
+                <li style={{ marginBottom: 'var(--space-2)' }}><a href="#" className="nav-link">Privacy Policy</a></li>
+                <li style={{ marginBottom: 'var(--space-2)' }}><a href="#" className="nav-link">Terms of Service</a></li>
+                <li><a href="#" className="nav-link">Cookie Policy</a></li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-4)' }}>Connect</h4>
+              <div className="flex gap-4">
+                <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s ease' }} className="hover:text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+                <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s ease' }} className="hover:text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M23 3.01006C22.0424 3.68553 20.9821 4.20017 19.86 4.54006C19.2577 3.84757 18.4573 3.35675 17.567 3.13398C16.6767 2.91122 15.7395 2.96725 14.8821 3.29451C14.0247 3.62177 13.2884 4.20446 12.773 4.96377C12.2575 5.72309 11.9877 6.62239 12 7.54006V8.54006C10.2426 8.58562 8.50127 8.19587 6.93101 7.4055C5.36074 6.61513 4.01032 5.44869 3 4.01006C3 4.01006 -1 13.0101 8 17.0101C5.94053 18.408 3.48716 19.109 1 19.0101C10 24.0101 21 19.0101 21 7.51006C20.9991 7.23151 20.9723 6.95365 20.92 6.68006C21.9406 5.67355 22.6608 4.40277 23 3.01006Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+                <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s ease' }} className="hover:text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 8C17.5913 8 19.1174 8.63214 20.2426 9.75736C21.3679 10.8826 22 12.4087 22 14V21H18V14C18 13.4696 17.7893 12.9609 17.4142 12.5858C17.0391 12.2107 16.5304 12 16 12C15.4696 12 14.9609 12.2107 14.5858 12.5858C14.2107 12.9609 14 13.4696 14 14V21H10V14C10 12.4087 10.6321 10.8826 11.7574 9.75736C12.8826 8.63214 14.4087 8 16 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M6 9H2V21H6V9Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M4 6C5.10457 6 6 5.10457 6 4C6 2.89543 5.10457 2 4 2C2.89543 2 2 2.89543 2 4C2 5.10457 2.89543 6 4 6Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+                <a href="#" style={{ color: 'var(--text-secondary)', transition: 'color 0.3s ease' }} className="hover:text-white">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M16 2H8C4.68629 2 2 4.68629 2 8V16C2 19.3137 4.68629 22 8 22H16C19.3137 22 22 19.3137 22 16V8C22 4.68629 19.3137 2 16 2Z" stroke="currentColor" strokeWidth="2"/>
+                    <path d="M17.5 6.5H17.51" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div style={{ 
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            marginTop: 'var(--space-8)',
+            paddingTop: 'var(--space-4)',
+            textAlign: 'center',
+            color: 'var(--text-secondary)',
+            fontSize: 'var(--text-sm)'
+          }}>
+            <p>© {new Date().getFullYear()} NextForge. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </main>
   );
 }
