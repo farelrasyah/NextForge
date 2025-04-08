@@ -9,6 +9,7 @@ import DemoSection from '../pages/LandingPage/DemoSection';
 import Testimonials from '../pages/LandingPage/Testimonials';
 import FAQ from '../pages/LandingPage/FAQ';
 import Contact from '../pages/LandingPage/Contact';
+import Link from 'next/link';
 
 // Import styles
 import '../styles/typography.css';
@@ -60,12 +61,12 @@ export default function Home() {
               Mulai kelola keuanganmu dengan cara yang lebih cerdas dan mudah sekarang juga.
             </p>
             <div className="flex justify-center gap-4">
-              <a href="#login" className="btn btn-primary">
+              <Link href="/auth/Login" className="btn btn-primary">
                 Mulai Gratis
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
-              </a>
+              </Link>
               <a href="#demo" className="btn btn-secondary">
                 Lihat Contoh Penggunaan
               </a>

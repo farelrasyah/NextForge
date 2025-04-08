@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useScrollPosition } from '../../components/hooks/useScrollPosition';
+import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +61,7 @@ const Navbar: React.FC = () => {
           <a href="#demo" className="nav-link" onClick={() => setIsMenuOpen(false)}>Demo</a>
           <a href="#testimonials" className="nav-link" onClick={() => setIsMenuOpen(false)}>Testimoni</a>
           <a href="#faq" className="nav-link" onClick={() => setIsMenuOpen(false)}>FAQ</a>
-          <a href="#login" className="btn btn-primary" onClick={() => setIsMenuOpen(false)}>Login</a>
+          <Link href="/auth/Login" className="btn btn-primary" onClick={() => setIsMenuOpen(false)}>Login</Link>
         </div>
       </div>
     </nav>
