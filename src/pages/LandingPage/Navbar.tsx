@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useScrollPosition } from '../../components/useScrollPosition';
+import { useScrollPosition } from '../../components/hooks/useScrollPosition';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

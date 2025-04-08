@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { useIntersectionObserver } from '../../components/useIntersectionObserver';
+import { useIntersectionObserver } from '../../components/hooks/useIntersectionObserver';
 
 const Demo: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);

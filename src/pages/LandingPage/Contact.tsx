@@ -1,5 +1,5 @@
 import React, { useRef, FormEvent, useState } from 'react';
-import { useIntersectionObserver } from '../../components/useIntersectionObserver';
+import { useIntersectionObserver } from '../../components/hooks/useIntersectionObserver';
 
 const Contact: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);

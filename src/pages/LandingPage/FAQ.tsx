@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { useIntersectionObserver } from '../../components/useIntersectionObserver';
+import { useIntersectionObserver } from '../../components/hooks/useIntersectionObserver';
 
 interface FAQItemProps {
   question: string;
@@ -106,3 +106,4 @@ const FAQ: React.FC = () => {
 };
 
 export default FAQ;
+

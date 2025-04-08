@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useIntersectionObserver } from '../../components/useIntersectionObserver';
+import { useIntersectionObserver } from '../../components/hooks/useIntersectionObserver';
 
 interface CardProps {
   icon: React.ReactNode;

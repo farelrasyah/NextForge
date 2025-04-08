@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import Card from './Card';
-import { useIntersectionObserver } from '../../components/useIntersectionObserver';
+import { useIntersectionObserver } from '../../components/hooks/useIntersectionObserver';
 
 const Features: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
